@@ -30,9 +30,9 @@
     <h1>Rangers</h1>
         #foreach ($i in $rangers)
           <a href="/animal/$animal.getId()" class="thumbnail">
-            <h4>$i.getName()</h4>
-            <h4>$i.getSightings().size() Reported Sighting(s)</h4>
-            <p>Click for details</p>
+            <h4>Name: $i.getName()</h4>
+            <h4>Contact: $i.getContact()</h4>
+            <h4>BadgeNumber: $i.getBadgeNumber()</h4>
           </a>
         #end
   </div>

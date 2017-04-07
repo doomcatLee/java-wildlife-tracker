@@ -15,14 +15,14 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -75,7 +75,8 @@ ALTER SEQUENCE endangered_animals_id_seq OWNED BY endangered_animals.id;
 
 CREATE TABLE locations (
     id integer NOT NULL,
-    name character varying
+    name character varying,
+    station_id integer
 );
 
 
@@ -210,6 +211,39 @@ ALTER SEQUENCE sightings_id_seq OWNED BY sightings.id;
 
 
 --
+-- Name: stations; Type: TABLE; Schema: public; Owner: Guest
+--
+
+CREATE TABLE stations (
+    id integer NOT NULL,
+    name character varying
+);
+
+
+ALTER TABLE stations OWNER TO "Guest";
+
+--
+-- Name: stations_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+--
+
+CREATE SEQUENCE stations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE stations_id_seq OWNER TO "Guest";
+
+--
+-- Name: stations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+--
+
+ALTER SEQUENCE stations_id_seq OWNED BY stations.id;
+
+
+--
 -- Name: endangered_animals id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
@@ -245,6 +279,13 @@ ALTER TABLE ONLY sightings ALTER COLUMN id SET DEFAULT nextval('sightings_id_seq
 
 
 --
+-- Name: stations id; Type: DEFAULT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY stations ALTER COLUMN id SET DEFAULT nextval('stations_id_seq'::regclass);
+
+
+--
 -- Data for Name: endangered_animals; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
@@ -265,7 +306,7 @@ SELECT pg_catalog.setval('endangered_animals_id_seq', 2, true);
 -- Data for Name: locations; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY locations (id, name) FROM stdin;
+COPY locations (id, name, station_id) FROM stdin;
 \.
 
 
@@ -349,6 +390,21 @@ SELECT pg_catalog.setval('sightings_id_seq', 30, true);
 
 
 --
+-- Data for Name: stations; Type: TABLE DATA; Schema: public; Owner: Guest
+--
+
+COPY stations (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: stations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+--
+
+SELECT pg_catalog.setval('stations_id_seq', 1, false);
+
+
+--
 -- Name: endangered_animals endangered_animals_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
 --
 
@@ -389,6 +445,13 @@ ALTER TABLE ONLY sightings
 
 
 --
--- PostgreSQL database dump complete
+-- Name: stations stations_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
 --
 
+ALTER TABLE ONLY stations
+    ADD CONSTRAINT stations_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--

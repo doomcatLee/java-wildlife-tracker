@@ -5,12 +5,11 @@ import java.util.Arrays;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class Location{
+public class Station{
   private int id;
-  private int station_id;
   private String name;
 
-  public Location(String name){
+  public Station(String name){
     this.name = name;
     this.id = id;
   }
@@ -19,40 +18,36 @@ public class Location{
     return id;
   }
 
-  public int getStationId(){
-    return station_id;
-  }
-
   public String getName(){
     return name;
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO locations (name, station_id) VALUES (:name, :station_id);";
+      String sql = "INSERT INTO stations (name) VALUES (:name);";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
-        .addParameter("station_id", this.station_id)
         .executeUpdate()
         .getKey();
     }
   }
 
-  public static List<Location> all() {
+  public static List<Station> all() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM locations;";
+      String sql = "SELECT * FROM stations;";
       return con.createQuery(sql)
-        .executeAndFetch(Location.class);
+        .executeAndFetch(Station.class);
     }
   }
 
-  public static Location find(int id) {
+  public static Station find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM locations WHERE id=:id;";
+      String sql = "SELECT * FROM stations WHERE id=:id;";
       return con.createQuery(sql)
         .addParameter("id", id)
-        .executeAndFetchFirst(Location.class);
+        .executeAndFetchFirst(Station.class);
     }
   }
+
 
 }
