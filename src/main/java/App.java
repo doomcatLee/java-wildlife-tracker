@@ -23,9 +23,16 @@ public class App {
     post("/endangered_sighting", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String rangerName = request.queryParams("rangerName");
+      String rangerContact = request.queryParams("contactNumber");
+      int rangerBadge = Integer.parseInt(request.queryParams("badgeNumber"));
+
+      Ranger ranger = new Ranger(rangerName, rangerContact, rangerBadge);
+
+      int rangerId = ranger.getId();
+
       int animalIdSelected = Integer.parseInt(request.queryParams("endangeredAnimalSelected"));
       String latLong = request.queryParams("latLong");
-      Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName);
+      Sighting sighting = new Sighting(rangerId, animalIdSelected, latLong, rangerName);
       sighting.save();
       model.put("sighting", sighting);
       model.put("animals", EndangeredAnimal.all());
@@ -38,9 +45,15 @@ public class App {
     post("/sighting", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String rangerName = request.queryParams("rangerName");
+      String rangerContact = request.queryParams("contactNumber");
+      int rangerBadge = Integer.parseInt(request.queryParams("badgeNumber"));
+
+      Ranger ranger = new Ranger(rangerName, rangerContact, rangerBadge);
+
+      int rangerId = ranger.getId();
       int animalIdSelected = Integer.parseInt(request.queryParams("animalSelected"));
       String latLong = request.queryParams("latLong");
-      Sighting sighting = new Sighting(animalIdSelected, latLong, rangerName);
+      Sighting sighting = new Sighting(ranger.getId(), animalIdSelected, latLong, rangerName);
       sighting.save();
       model.put("sighting", sighting);
       model.put("animals", NotEndangeredAnimal.all());

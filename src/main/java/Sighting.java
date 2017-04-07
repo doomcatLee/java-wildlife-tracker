@@ -7,12 +7,13 @@ import java.sql.Timestamp;
 
 public class Sighting {
   private int animal_id;
+  private int ranger_id;
   private String location;
   private String ranger_name;
   private int id;
   public Timestamp sightTime;
 
-  public Sighting(int animal_id, String location, String ranger_name) {
+  public Sighting(int animal_id, int ranger_id, String location, String ranger_name) {
     this.animal_id = animal_id;
     this.location = location;
     this.ranger_name = ranger_name;
@@ -34,6 +35,10 @@ public class Sighting {
 
   public String getRangerName() {
     return ranger_name;
+  }
+
+  public Timestamp getSightTime(){
+    return sightTime;
   }
 
   @Override
