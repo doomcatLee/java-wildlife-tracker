@@ -8,15 +8,15 @@ import java.sql.Timestamp;
 public class Sighting {
   private int animal_id;
   private int ranger_id;
-  private String location;
+  private int location_id;
   private String ranger_name;
   private int id;
   public Timestamp sightTime;
 
-  public Sighting(int animal_id, int ranger_id, String location, String ranger_name) {
+  public Sighting(int animal_id, int ranger_id, int location_id, String ranger_name) {
     this.animal_id = animal_id;
     this.ranger_id = ranger_id;
-    this.location = location;
+    this.location_id = location_id;
     this.ranger_name = ranger_name;
     this.id = id;
     sightTime = new Timestamp(new Date().getTime());
@@ -28,16 +28,16 @@ public class Sighting {
 
   public int getRangerId(){
     return ranger_id;
+  }
 
+  public int getLocationId(){
+    return location_id;
   }
 
   public int getAnimalId() {
     return animal_id;
   }
 
-  public String getLocation() {
-    return location;
-  }
 
   public String getRangerName() {
     return ranger_name;
@@ -53,18 +53,18 @@ public class Sighting {
       return false;
     } else {
       Sighting newSighting = (Sighting) otherSighting;
-      return this.getAnimalId() == (newSighting.getAnimalId()) && this.getLocation().equals(newSighting.getLocation()) && this.getRangerName().equals(newSighting.getRangerName());
+      return this.getAnimalId() == (newSighting.getAnimalId()) && this.getLocationId() == (newSighting.getLocationId()) && this.getRangerName().equals(newSighting.getRangerName());
     }
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO sightings (animal_id, location, ranger_name, sight_time, ranger_id) VALUES (:animal_id, :location, :ranger_name, now(), :ranger_id);";
+      String sql = "INSERT INTO sightings (animal_id, ranger_name, sight_time, ranger_id, location_id) VALUES (:animal_id, :ranger_name, now(), :ranger_id, :location_id);";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("animal_id", this.animal_id)
-        .addParameter("location", this.location)
         .addParameter("ranger_name", this.ranger_name)
         .addParameter("ranger_id", this.ranger_id)
+        .addParameter("location_id", this.location_id)
         .throwOnMappingFailure(false)
         .executeUpdate()
         .getKey();

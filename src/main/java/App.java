@@ -28,12 +28,16 @@ public class App {
       String rangerBadge = request.queryParams("badgeNumber");
 
       Ranger ranger = new Ranger(rangerName, rangerContact, rangerBadge);
-      ranger.save();
       int rangerId = ranger.getId();
 
       int animalIdSelected = Integer.parseInt(request.queryParams("endangeredAnimalSelected"));
-      String latLong = request.queryParams("latLong");
-      Sighting sighting = new Sighting(animalIdSelected, rangerId, latLong, rangerName);
+      String locationName = request.queryParams("locationName");
+
+      Location location = new Location(locationName);
+      ranger.save();
+      location.save();
+
+      Sighting sighting = new Sighting(animalIdSelected, rangerId, location.getId(), rangerName);
       sighting.save();
       model.put("sighting", sighting);
       model.put("animals", EndangeredAnimal.all());
@@ -50,12 +54,16 @@ public class App {
       String rangerBadge = request.queryParams("badgeNumber");
 
       Ranger ranger = new Ranger(rangerName, rangerContact, rangerBadge);
-      ranger.save();
 
       int rangerId = ranger.getId();
       int animalIdSelected = Integer.parseInt(request.queryParams("animalSelected"));
-      String latLong = request.queryParams("latLong");
-      Sighting sighting = new Sighting(animalIdSelected, rangerId, latLong, rangerName);
+      String locationName = request.queryParams("locationName");
+
+      Location location = new Location(locationName);
+      
+      ranger.save();
+      location.save();
+      Sighting sighting = new Sighting(animalIdSelected, rangerId, location.getId(), rangerName);
       sighting.save();
       model.put("sighting", sighting);
       model.put("animals", NotEndangeredAnimal.all());

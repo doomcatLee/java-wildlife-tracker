@@ -22,7 +22,7 @@ To create the necessary databases, launch postgres, then psql, and run the follo
 * `\c wildlife_tracker;`
 * `CREATE TABLE not_endangered_animals (id serial PRIMARY KEY, name varchar, health varchar, age varchar);`
 * `CREATE TABLE endangered_animals (id serial PRIMARY KEY, name varchar, health varchar, age varchar);`
-* `CREATE TABLE sightings (id serial PRIMARY KEY, animal_id int, location varchar, ranger_name varchar);`
+* `CREATE TABLE sightings (id serial PRIMARY KEY, animal_id int, location varchar, sight_time timestamp, ranger_id int, location_id int);`
 * `CREATE TABLE rangers (id serial PRIMARY KEY, animal_id int, ranger_id int, contact varchar, badge_number int);`
 * `CREATE TABLE locations (id serial PRIMARY KEY, name varchar);`
 

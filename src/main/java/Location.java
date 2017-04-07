@@ -32,4 +32,21 @@ public class Location{
     }
   }
 
+  public static List<Location> all() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM locations;";
+      return con.createQuery(sql)
+        .executeAndFetch(Location.class);
+    }
+  }
+
+  public static Location find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM locations WHERE id=:id;";
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Location.class);
+    }
+  }
+
 }
