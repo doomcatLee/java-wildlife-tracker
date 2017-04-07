@@ -70,4 +70,6 @@ public class SightingTest {
     assertTrue(NotEndangeredAnimal.find(999) == null);
   }
 
+
+
 }

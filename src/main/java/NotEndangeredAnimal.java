@@ -11,14 +11,6 @@ public class NotEndangeredAnimal extends Animal{
     this.age = age;
   }
 
-  public String getName() {
-    return name;
-  }
-
-  public int getId() {
-    return id;
-  }
-
   @Override
   public boolean equals(Object otherNotEndangeredAnimal) {
     if(!(otherNotEndangeredAnimal instanceof NotEndangeredAnimal)) {

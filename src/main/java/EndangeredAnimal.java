@@ -5,27 +5,12 @@ import java.util.List;
 public class EndangeredAnimal extends Animal{
   public boolean endangered;
 
+
   public EndangeredAnimal(String name, String health, String age) {
     this.name = name;
     this.id = id;
     this.health = health;
     this.age = age;
-  }
-
-  public String getHealth() {
-    return health;
-  }
-
-  public String getAge() {
-    return age;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public int getId() {
-    return id;
   }
 
   @Override
