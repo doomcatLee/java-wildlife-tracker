@@ -16,6 +16,7 @@ public class App {
       model.put("animals", NotEndangeredAnimal.all());
       model.put("endangeredAnimals", EndangeredAnimal.all());
       model.put("sightings", Sighting.all());
+      model.put("rangers", Ranger.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -115,5 +116,14 @@ public class App {
       model.put("template", "templates/error.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    get("/ranger/:id" ,(request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Ranger ranger = Ranger.find(Integer.parseInt(request.params("id")));
+      model.put("ranger", ranger);
+      model.put("template", "templates/ranger.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   }
 }

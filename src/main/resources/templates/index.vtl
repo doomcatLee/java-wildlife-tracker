@@ -76,3 +76,12 @@
     </a>
   #end
 #end
+
+
+<h3>All Rangers</h3>
+  #foreach ($ranger in $rangers)
+    <a href="/ranger/$ranger.getId()" class="thumbnail">
+      <h4>$ranger.getName()</h4>
+      <p>Click for details</p>
+    </a>
+  #end
