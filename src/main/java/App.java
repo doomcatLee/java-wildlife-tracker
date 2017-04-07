@@ -21,6 +21,23 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+
+    get("/dashboard", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("rangers", Ranger.all());
+      model.put("NotEndangeredAnimal", NotEndangeredAnimal.all());
+      model.put("endangeredAnimals", EndangeredAnimal.all());
+      // model.put("stations", Station.all());
+      model.put("template", "templates/dashboard.vtl");
+      return new ModelAndView(model,layout);
+    }, new VelocityTemplateEngine());
+
+    get("/register", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/register.vtl");
+      return new ModelAndView(model,layout);
+    }, new VelocityTemplateEngine());
+
     post("/endangered_sighting", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String rangerName = request.queryParams("rangerName");
@@ -60,7 +77,7 @@ public class App {
       String locationName = request.queryParams("locationName");
 
       Location location = new Location(locationName);
-      
+
       ranger.save();
       location.save();
       Sighting sighting = new Sighting(animalIdSelected, rangerId, location.getId(), rangerName);

@@ -1,0 +1,48 @@
+
+<div class="row">
+  <div class="col-md-4" id="sightings">
+    <h1>Sightings</h1>
+    <h3>Endangered Animals</h3>
+      #if ($endangeredAnimals.size() == 0)
+    <a href="/animal/new">Add Animal to Database to Report a Sighting</a>
+      #else
+        #foreach ($endangeredAnimal in $endangeredAnimals)
+          <a href="/endangered_animal/$endangeredAnimal.getId()" class="thumbnail">
+            <h4>$endangeredAnimal.getName()</h4>
+            <h4>$endangeredAnimal.getSightings().size() Reported Sighting(s)</h4>
+            <p>Click for details</p>
+          </a>
+        #end
+    #end
+
+    <h3>All Animals & Sightings</h3>
+        #foreach ($i in $NotEndangeredAnimal)
+          <a href="/animal/$animal.getId()" class="thumbnail">
+            <h4>$i.getName()</h4>
+            <h4>$i.getSightings().size() Reported Sighting(s)</h4>
+            <p>Click for details</p>
+          </a>
+        #end
+
+
+  </div>
+  <div class="col-md-4" id="rangers">
+    <h1>Rangers</h1>
+        #foreach ($i in $rangers)
+          <a href="/animal/$animal.getId()" class="thumbnail">
+            <h4>$i.getName()</h4>
+            <h4>$i.getSightings().size() Reported Sighting(s)</h4>
+            <p>Click for details</p>
+          </a>
+        #end
+  </div>
+  <div class="col-md-4" id="stations">
+    <h1>Stations</h1>
+  </div>
+</div>
+
+<div class="row">
+  <button type="button" name="button" class="btn btn-default">Add sightings</button>
+  <button type="button" name="button" class="btn btn-default">Add rangers</button>
+  <button type="button" name="button" class="btn btn-default">Add stations</button>
+</div>
