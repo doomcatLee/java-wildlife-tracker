@@ -9,9 +9,9 @@ public class Ranger{
   private int id;
   private String name;
   private String contact;
-  private int badge_number;
+  private String badge_number;
 
-  public Ranger(String name, String contact, int badgeNumber){
+  public Ranger(String name, String contact, String badge_number){
     this.id = id;
     this.name = name;
     this.contact = contact;
@@ -26,7 +26,7 @@ public class Ranger{
     return contact;
   }
 
-  public int getBadgeNumber(){
+  public String getBadgeNumber(){
     return badge_number;
   }
 

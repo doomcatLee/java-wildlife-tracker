@@ -24,7 +24,7 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       String rangerName = request.queryParams("rangerName");
       String rangerContact = request.queryParams("contactNumber");
-      int rangerBadge = Integer.parseInt(request.queryParams("badgeNumber"));
+      String rangerBadge = request.queryParams("badgeNumber");
 
       Ranger ranger = new Ranger(rangerName, rangerContact, rangerBadge);
       ranger.save();
@@ -46,11 +46,11 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       String rangerName = request.queryParams("rangerName");
       String rangerContact = request.queryParams("contactNumber");
-      int rangerBadge = Integer.parseInt(request.queryParams("badgeNumber"));
+      String rangerBadge = request.queryParams("badgeNumber");
 
       Ranger ranger = new Ranger(rangerName, rangerContact, rangerBadge);
       ranger.save();
-      
+
       int rangerId = ranger.getId();
       int animalIdSelected = Integer.parseInt(request.queryParams("animalSelected"));
       String latLong = request.queryParams("latLong");
