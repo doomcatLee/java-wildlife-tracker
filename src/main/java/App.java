@@ -27,12 +27,12 @@ public class App {
       int rangerBadge = Integer.parseInt(request.queryParams("badgeNumber"));
 
       Ranger ranger = new Ranger(rangerName, rangerContact, rangerBadge);
-
+      ranger.save();
       int rangerId = ranger.getId();
 
       int animalIdSelected = Integer.parseInt(request.queryParams("endangeredAnimalSelected"));
       String latLong = request.queryParams("latLong");
-      Sighting sighting = new Sighting(rangerId, animalIdSelected, latLong, rangerName);
+      Sighting sighting = new Sighting(animalIdSelected, rangerId, latLong, rangerName);
       sighting.save();
       model.put("sighting", sighting);
       model.put("animals", EndangeredAnimal.all());
@@ -49,11 +49,12 @@ public class App {
       int rangerBadge = Integer.parseInt(request.queryParams("badgeNumber"));
 
       Ranger ranger = new Ranger(rangerName, rangerContact, rangerBadge);
-
+      ranger.save();
+      
       int rangerId = ranger.getId();
       int animalIdSelected = Integer.parseInt(request.queryParams("animalSelected"));
       String latLong = request.queryParams("latLong");
-      Sighting sighting = new Sighting(ranger.getId(), animalIdSelected, latLong, rangerName);
+      Sighting sighting = new Sighting(animalIdSelected, rangerId, latLong, rangerName);
       sighting.save();
       model.put("sighting", sighting);
       model.put("animals", NotEndangeredAnimal.all());

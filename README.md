@@ -12,7 +12,7 @@ The Forest Service is considering a proposal from a timber company to clearcut a
 | Behavior                   | Input Example     | Output Example    |
 | -------------------------- | -----------------:| -----------------:|
 | Each instances of sighting adds a timestamp | none | none |
-| 
+|
 
 ### Setup
 
@@ -20,10 +20,12 @@ To create the necessary databases, launch postgres, then psql, and run the follo
 
 * `CREATE DATABASE wildlife_tracker;`
 * `\c wildlife_tracker;`
-* `CREATE TABLE animals (id serial PRIMARY KEY, name varchar);`
+* `CREATE TABLE not_endangered_animals (id serial PRIMARY KEY, name varchar, health varchar, age varchar);`
 * `CREATE TABLE endangered_animals (id serial PRIMARY KEY, name varchar, health varchar, age varchar);`
 * `CREATE TABLE sightings (id serial PRIMARY KEY, animal_id int, location varchar, ranger_name varchar);`
+* `CREATE TABLE rangers (id serial PRIMARY KEY, animal_id int, ranger_id int, contact varchar, badge_number int);`
 * `CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;`
+
 
 ### License
 
