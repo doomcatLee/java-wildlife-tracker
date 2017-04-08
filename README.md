@@ -12,7 +12,7 @@ The Forest Service is considering a proposal from a timber company to clearcut a
 | Behavior                   | Input Example     | Output Example    |
 | -------------------------- | -----------------:| -----------------:|
 | Each instances of sighting adds a timestamp | none | none |
-|
+
 
 ### Setup
 
