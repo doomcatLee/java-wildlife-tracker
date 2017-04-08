@@ -27,11 +27,11 @@ To create the necessary databases, launch postgres, then psql, and run the follo
 
 * `CREATE TABLE endangered_animals (id serial PRIMARY KEY, name varchar, health varchar, age varchar);`
 
-* `CREATE TABLE sightings (id serial PRIMARY KEY, animal_id int, location varchar, sight_time timestamp, ranger_id int, location_id int);`
+* `CREATE TABLE sightings (id serial PRIMARY KEY, animal_id int, sight_time timestamp, ranger_id int, location_id int);`
 
-* `CREATE TABLE rangers (id serial PRIMARY KEY, animal_id int, ranger_id int, contact varchar, badge_number int);`
+* `CREATE TABLE rangers (id serial PRIMARY KEY, name varchar, contact varchar, badge_number varchar);`
 
-* `CREATE TABLE locations (id serial PRIMARY KEY, name varchar,station_id int);`
+* `CREATE TABLE locations (id serial PRIMARY KEY, name varchar, station_id int);`
 
 * `CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;`
 

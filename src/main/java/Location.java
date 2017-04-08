@@ -27,6 +27,10 @@ public class Location{
     return name;
   }
 
+  public void setStationId(int id){
+    station_id = id;
+  }
+
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO locations (name, station_id) VALUES (:name, :station_id);";
@@ -52,6 +56,16 @@ public class Location{
       return con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Location.class);
+    }
+  }
+
+  public void updateStationId(){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE locations SET station_id =:station_id WHERE id=:id;";
+      con.createQuery(sql)
+        .addParameter("id", id)
+        .addParameter("station_id", station_id)
+        .executeUpdate();
     }
   }
 

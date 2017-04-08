@@ -1,8 +1,8 @@
-<h4><a href="/">Home</a></h4>
+<h4><a href="/dashboard">Dashboard</a></h4>
 
 <h1>Add Animal to Database</h1>
 
-<form action="/animal/new" method="post">
+<form action="/animal/new" method="post" required>
   <label>Animal Species</label>
   <input type="text" name="name">
   <label>Endangered?</label>
@@ -25,5 +25,5 @@
   </select>
 
   <button type="submit">Add Animal</button>
-  
+
 </form>

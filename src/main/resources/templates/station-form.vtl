@@ -1,0 +1,15 @@
+<h3> Add a station</h3>
+<form action="/station" method="post" required>
+  #if ($locations.size() > 0)
+  <label>Select location</label>
+    <select name="locationSelected">
+      #foreach($i in $locations)
+        <option value="$i.getId()">$i.getName()</option>
+      #end
+    </select>
+  #end
+
+  <label>Station name</label>
+  <input type="text" name="stationName">
+  <button class="btn btn-default" type="submit">Add</button>
+</form>
