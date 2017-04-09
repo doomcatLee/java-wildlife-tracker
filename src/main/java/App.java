@@ -110,7 +110,9 @@ public class App {
         model.put("endangeredAnimals", EndangeredAnimal.all());
       } else {
         String name = request.queryParams("name");
-        NotEndangeredAnimal animal = new NotEndangeredAnimal(name, "ill", "helc");
+        String health = request.queryParams("health");
+        String age = request.queryParams("age");
+        NotEndangeredAnimal animal = new NotEndangeredAnimal(name, health, age);
         animal.save();
         model.put("animals", NotEndangeredAnimal.all());
         model.put("endangeredAnimals", EndangeredAnimal.all());

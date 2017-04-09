@@ -77,6 +77,7 @@ public class EndangeredAnimal extends Animal{
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM sightings WHERE animal_id=:id;";
         List<Sighting> sightings = con.createQuery(sql)
+          .throwOnMappingFailure(false)
           .addParameter("id", id)
           .executeAndFetch(Sighting.class);
       return sightings;
