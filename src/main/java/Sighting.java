@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 
 public class Sighting {
   private int animal_id;
   private int ranger_id;
   private int location_id;
   private int id;
-  public Timestamp sightTime;
+  private Timestamp sightTime;
 
   public Sighting(int animal_id, int ranger_id, int location_id) {
     this.animal_id = animal_id;
@@ -36,8 +37,15 @@ public class Sighting {
     return animal_id;
   }
 
-  public Timestamp getSightTime(){
-    return sightTime;
+  public String getSightTime(){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT sight_time FROM sightings WHERE id=:id;";
+      sightTime = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Timestamp.class);
+    }
+    String time = DateFormat.getDateTimeInstance().format(sightTime);
+    return time;
   }
 
   @Override
@@ -81,6 +89,25 @@ public class Sighting {
       return sighting;
     } catch (IndexOutOfBoundsException exception) {
       return null;
+    }
+  }
+
+
+  public Ranger getRanger(){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM rangers WHERE id=:id;";
+      return con.createQuery(sql)
+      .addParameter("id", ranger_id)
+      .executeAndFetchFirst(Ranger.class);
+    }
+  }
+
+  public Location getLocation(){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM locations WHERE id=:id;";
+      return con.createQuery(sql)
+      .addParameter("id", location_id)
+      .executeAndFetchFirst(Location.class);
     }
   }
 

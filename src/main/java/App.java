@@ -132,6 +132,8 @@ public class App {
     get("/endangered_animal/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       EndangeredAnimal endangeredAnimal = EndangeredAnimal.find(Integer.parseInt(request.params("id")));
+
+
       model.put("endangeredAnimal", endangeredAnimal);
       model.put("template", "templates/endangered_animal.vtl");
       return new ModelAndView(model, layout);
@@ -146,6 +148,7 @@ public class App {
     get("/ranger/:id" ,(request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Ranger ranger = Ranger.find(Integer.parseInt(request.params("id")));
+      model.put("sightings", Sighting.all());
       model.put("ranger", ranger);
       model.put("template", "templates/ranger.vtl");
       return new ModelAndView(model, layout);
